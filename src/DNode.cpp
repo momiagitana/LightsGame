@@ -12,11 +12,17 @@ void DNode::draw(sf::RenderWindow& win) const
     else
         circle.setFillColor(sf::Color::Blue);
     
+ 
     win.draw(circle);
 
-    sf::RectangleShape edge;
-
+    drawEdges(win);
 
     
 
+}
+
+void DNode::drawEdges(sf::RenderWindow& win) const
+{
+    
+    
 }

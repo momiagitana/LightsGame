@@ -13,9 +13,12 @@ private:
     bool m_on = false;
 
 
+
+
 public:
 
     void draw(sf::RenderWindow&) const;
+    void drawEdges(sf::RenderWindow& win) const;
     bool contains() const;
     
     void shiftL();

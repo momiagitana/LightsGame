@@ -4,6 +4,13 @@
 DNode::DNode(std::vector<bool> legs, sf::Vector2f loc)
     :m_legs (legs), m_loc (loc)
 {
+    m_neighbours.resize(6);
+    m_neighbours[0] = nullptr;
+    m_neighbours[1] = nullptr;
+    m_neighbours[2] = nullptr;
+    m_neighbours[3] = nullptr; 
+    m_neighbours[4] = nullptr;
+    m_neighbours[5] = nullptr;
 }
 
 DNode::~DNode()
@@ -21,14 +28,13 @@ void DNode::draw(sf::RenderWindow& win) const
     
  
     win.draw(circle);
-
     drawEdges(win, circle);
 
 }
 
 sf::CircleShape DNode::makeCircle() const
 {
-    sf::CircleShape circle(CIRCLE_SIZE);
+    sf::CircleShape circle(UNIT_SIZE);
 
     circle.setPointCount(60);
     circle.setPosition(m_loc);
@@ -65,10 +71,50 @@ bool DNode::contains(sf::Vector2f loc) const
 
 void DNode::shiftR()
 {
-    std::rotate(m_legs.begin(), m_legs.begin()+1, m_legs.end());
+    std::rotate(m_legs.begin(),m_legs.end()-1,m_legs.end());
 }
 
 void DNode::shiftL()
 {
     std::rotate(m_legs.begin(), m_legs.begin()+1, m_legs.end());
+}
+
+void DNode::handleClick(sf::Event click, sf::Vector2f mouseLoc)
+{
+    if (contains(mouseLoc))
+    {
+        if (click.mouseButton.button == sf::Mouse::Right)
+            shiftR();
+        if (click.mouseButton.button == sf::Mouse::Left)
+            shiftL();
+
+        checkTouches();
+    }
+
+
+}
+
+void DNode::addNeighbour(DNode* newNei, int index)
+{
+    m_neighbours[index] = newNei;
+}
+
+void DNode::checkTouches()
+{
+    for (int i = 0; i < m_legs.size(); i++)
+        if (m_legs[i] && m_neighbours[i] != nullptr) //check if can take nullptr
+            if(m_neighbours[i]->isTouching(this))
+                m_on = true;
+}
+
+bool DNode::isTouching(DNode* calledMe)
+{
+    for(int i = 0; i < m_neighbours.size(); i++)
+        if (m_neighbours[i] == calledMe && m_legs[i])
+        {
+            m_on = true;
+            return true;
+        }
+    
+    return false;
 }

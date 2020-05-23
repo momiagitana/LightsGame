@@ -1,3 +1,3 @@
 
 
-static const float CIRCLE_SIZE = 10;
+static const float UNIT_SIZE = 10;

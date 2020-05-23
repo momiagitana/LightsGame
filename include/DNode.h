@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <globals.h>
 
 class DNode
 {
@@ -18,8 +19,9 @@ private:
 public:
 
     void draw(sf::RenderWindow&) const;
-    void drawEdges(sf::RenderWindow& win) const;
-    bool contains() const;
+    void drawEdges(sf::RenderWindow&, const sf::CircleShape&) const;
+    bool contains(sf::Vector2f) const;
+    sf::CircleShape makeCircle() const;
     
     void shiftL();
     void shiftR();
@@ -28,12 +30,3 @@ public:
     DNode(std::vector<bool>, sf::Vector2f);
     ~DNode();
 };
-
-DNode::DNode(std::vector<bool> legs, sf::Vector2f loc)
-    :m_legs (legs), m_loc (loc)
-{
-}
-
-DNode::~DNode()
-{
-}

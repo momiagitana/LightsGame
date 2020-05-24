@@ -1,17 +1,20 @@
 #pragma once
 #include <DNode.h>
 
+using lineOfNodes = std::vector <std::shared_ptr<DNode>>;
+using matOfNodes = std::vector <lineOfNodes>;
 
 class DGraph
 {
 private:
-    std::vector <DNode*> m_nodes;
+    lineOfNodes m_nodes;
+
 public:
 
-    void addNode(DNode*);
+    void addNode(std::shared_ptr<DNode>);
     void handleClick(sf::Event, sf::Vector2f);
     void draw(sf::RenderWindow&);
-    DGraph(/* args */);
+    DGraph(matOfNodes);
     ~DGraph();
 };
 

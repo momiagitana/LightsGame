@@ -1,14 +1,18 @@
 #include <DGraph.h>
 
-DGraph::DGraph(/* args */)
+DGraph::DGraph(matOfNodes mat)
 {
+    for (int row = 0; row < mat.size(); row++)
+        for (int col = 0; col < mat[0].size(); col++)
+            if (mat[row][col] != nullptr)
+                m_nodes.push_back(mat[row][col]);
 }
 
 DGraph::~DGraph()
 {   
 }
 
-void DGraph::addNode(DNode* newNode)
+void DGraph::addNode(std::shared_ptr<DNode> newNode)
 {
     m_nodes.push_back(newNode);
 }

@@ -5,7 +5,12 @@ DGraph::DGraph(matOfNodes mat)
     for (int row = 0; row < mat.size(); row++)
         for (int col = 0; col < mat[0].size(); col++)
             if (mat[row][col] != nullptr)
+            {
                 m_nodes.push_back(mat[row][col]);
+                // mat[row][col]->setName(counter);
+                // counter++;
+            }
+
 }
 
 DGraph::~DGraph()

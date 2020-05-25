@@ -1,6 +1,6 @@
 
 
-static const float UNIT_SIZE = 10;
+static const float CIRCLE_SIZE = 6;
 
 static const int FIRST_ROW = 3;
 

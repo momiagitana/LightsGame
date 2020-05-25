@@ -7,7 +7,9 @@ using matOfNodes = std::vector <lineOfNodes>;
 class DGraph
 {
 private:
+
     lineOfNodes m_nodes;
+    
 
 public:
 

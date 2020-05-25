@@ -3,21 +3,25 @@
 #include <vector>
 #include <globals.h>
 
+
 class DNode
 {
 private:
+    using lineOfNodes = std::vector <std::shared_ptr<DNode>>;
+
     std::vector <bool> m_legs;
-    std::vector <DNode*> m_neighbours;
+    lineOfNodes m_potentialNeighbours;
+    std::vector<int> m_actualNeighbours;
 
+    float m_unit;
     sf::Vector2f m_loc;
-
     bool m_on = false;
 
 
     void shiftL();
     void shiftR();
     bool contains(sf::Vector2f) const;
-    bool isTouching(DNode*) const;
+    bool isTouching(std::shared_ptr<DNode>) const;
     void checkTouches();
     
 
@@ -28,11 +32,12 @@ public:
     void drawEdges(sf::RenderWindow&, const sf::CircleShape&) const;
     sf::CircleShape makeCircle() const;
     void handleClick(sf::Event, sf::Vector2f);
-    void addNeighbour(DNode*, int);
+    void addNeighbour(std::shared_ptr<DNode>, int);
     bool isTouching(DNode*);
+    void initLegs(std::vector<bool>);
     
 
 
-    DNode(std::vector<bool>, sf::Vector2f);
+    DNode(sf::Vector2f, float);
     ~DNode();
 };

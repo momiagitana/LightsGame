@@ -1,16 +1,21 @@
 #include <DNode.h>
 
 
-DNode::DNode(std::vector<bool> legs, sf::Vector2f loc)
-    :m_legs (legs), m_loc (loc)
+DNode::DNode(sf::Vector2f loc, float unit)
+    :m_loc (loc), m_unit(unit)
 {
-    m_neighbours.resize(6);
-    m_neighbours[0] = nullptr;
-    m_neighbours[1] = nullptr;
-    m_neighbours[2] = nullptr;
-    m_neighbours[3] = nullptr; 
-    m_neighbours[4] = nullptr;
-    m_neighbours[5] = nullptr;
+    m_potentialNeighbours.resize(6);
+    m_potentialNeighbours[0] = nullptr;
+    m_potentialNeighbours[1] = nullptr;
+    m_potentialNeighbours[2] = nullptr;
+    m_potentialNeighbours[3] = nullptr; 
+    m_potentialNeighbours[4] = nullptr;
+    m_potentialNeighbours[5] = nullptr;
+}
+
+void DNode::initLegs(std::vector<bool> legs)
+{
+    m_legs = legs;
 }
 
 DNode::~DNode()
@@ -27,14 +32,14 @@ void DNode::draw(sf::RenderWindow& win) const
         circle.setFillColor(sf::Color::White);
     
  
-    win.draw(circle);
     drawEdges(win, circle);
+    win.draw(circle);
 
 }
 
 sf::CircleShape DNode::makeCircle() const
 {
-    sf::CircleShape circle(UNIT_SIZE);
+    sf::CircleShape circle(CIRCLE_SIZE);
 
     circle.setPointCount(60);
     circle.setPosition(m_loc);
@@ -45,15 +50,20 @@ sf::CircleShape DNode::makeCircle() const
 
 void DNode::drawEdges(sf::RenderWindow& win, const sf::CircleShape& circle) const
 {
+
     sf::RectangleShape edge;
-    edge.setFillColor(sf::Color::Red);
-    edge.setSize(sf::Vector2f(30.0f, 2.0f));
+    edge.setFillColor(sf::Color::White);
+    edge.setSize(sf::Vector2f(m_unit*2, 2.0f));
+
+    sf::CircleShape middle(1,60);
+    middle.setOrigin(middle.getGlobalBounds().width/2, middle.getGlobalBounds().height/2);
+    middle.setPosition(m_loc);
     
     for (int i = 0; i < m_legs.size(); i++)
     {
         if (m_legs[i])
         {
-            edge.setPosition(circle.getTransform().transformPoint(circle.getPoint(i*10+14)));
+            edge.setPosition(middle.getTransform().transformPoint(middle.getPoint(i*10)));
             edge.setRotation(i*60.0f);
             win.draw(edge);
         }
@@ -94,23 +104,28 @@ void DNode::handleClick(sf::Event click, sf::Vector2f mouseLoc)
 
 }
 
-void DNode::addNeighbour(DNode* newNei, int index)
+void DNode::addNeighbour(std::shared_ptr<DNode> newNei, int index)
 {
-    m_neighbours[index] = newNei;
+    m_potentialNeighbours[index] = newNei;
 }
 
 void DNode::checkTouches()
 {
     for (int i = 0; i < m_legs.size(); i++)
-        if (m_legs[i] && m_neighbours[i] != nullptr) //check if can take nullptr
-            if(m_neighbours[i]->isTouching(this))
-                m_on = true;
+        if (m_legs[i] && m_potentialNeighbours[i] != nullptr) //check if can take nullptr
+            if(m_potentialNeighbours[i]->isTouching(this))//
+                m_on = true; //add to list
+            // else
+            // {
+            //     //take it off from list
+            // }
+            
 }
 
 bool DNode::isTouching(DNode* calledMe)
 {
-    for(int i = 0; i < m_neighbours.size(); i++)
-        if (m_neighbours[i] == calledMe && m_legs[i])
+    for(int i = 0; i < m_potentialNeighbours.size(); i++)
+        if (m_potentialNeighbours[i].get() == calledMe && m_legs[i])
         {
             m_on = true;
             return true;

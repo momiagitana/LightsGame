@@ -16,8 +16,7 @@ LevelBuilder::LevelBuilder(int level, sf::Vector2u winSize)
         m_sizes.push_back(size);
     m_sizes.insert(m_sizes.end(), m_sizes.rbegin()+1, m_sizes.rend());
 
-    // std::vector<int> secondHalf(m_sizes);
-    // std::reverse(secondHalf.begin(), secondHalf.end()-1);
+
 }
 
 LevelBuilder::~LevelBuilder()

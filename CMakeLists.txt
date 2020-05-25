@@ -24,6 +24,7 @@ add_subdirectory (src)
 add_subdirectory (resources)
 
 set (SFML_STATIC_LIBRARIES FALSE)
+#set (SFML_DIR "/Library/Frameworks/SFML.framework/Resources/CMake/SFMLConfig.cmake")
 set (SFML_DIR "/usr/local/Cellar/sfml/2.5.1")
 
 find_package (SFML 2.5 COMPONENTS graphics REQUIRED)
@@ -31,3 +32,7 @@ find_package (SFML 2.5 COMPONENTS graphics REQUIRED)
 set_target_properties ( PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO RELEASE)
 
 target_link_libraries (oop2_ex04 sfml-graphics)
+
+
+
+# //"macFrameworkPath": ["/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"],

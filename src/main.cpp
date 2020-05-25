@@ -1,12 +1,17 @@
-#include <SFML/Graphics.hpp>
+
+#include <LevelBuilder.h>
 
 int main()
 {
-    auto window = sf::RenderWindow(sf::VideoMode(300, 300), "Example");
+    auto window = sf::RenderWindow(sf::VideoMode(1000, 800), "LIGHTS GAME");
+
+    LevelBuilder level (1, window.getSize());
+    DGraph graph =  level.build();
 
     while (window.isOpen())
     {
         window.clear();
+        graph.draw(window);
         window.display();
 
         if (auto event = sf::Event{}; window.waitEvent(event))
@@ -16,7 +21,15 @@ int main()
             case sf::Event::Closed:
                 window.close();
                 break;
+
+            case sf::Event::MouseButtonReleased:
+                
+                auto mouseLoc = window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y });
+                graph.handleClick(event, mouseLoc);
+
+                break;
             }
+
         }
     }
 }

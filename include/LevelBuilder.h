@@ -12,12 +12,12 @@ private:
     int m_height;
     std::vector<int> m_sizes;
 
-    void nullOrNode(matOfNodes&, int, int) const;
+    void nullOrNode(matOfNodes&, int, int);
 
 public:
     LevelBuilder(int);
     ~LevelBuilder();
 
-    DGraph build() const;
+    DGraph build();
 };
 

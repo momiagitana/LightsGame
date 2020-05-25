@@ -8,7 +8,8 @@ LevelBuilder::LevelBuilder(int level, sf::Vector2u winSize)
     m_width = m_midRow * 2 + 1;
     m_height = (m_midRow - FIRST_ROW) * 2 + 3;
 
-    m_unitx = (winSize.x /(m_width*4));
+
+    m_unitx = ((winSize.x - 10 )/((m_width-1)*2));
     
 
     m_sizes.push_back(0);
@@ -79,7 +80,7 @@ void LevelBuilder::nullOrNode(matOfNodes & mat, int row, int col)
     int nodeWidth = m_unitx*4;
     int nodeHeight = nodeWidth * (sqrt(3)/2);
 
-    auto loc = sf::Vector2f(nodeWidth/2 + (nodeWidth/2)*col, nodeHeight/2 + nodeHeight * row);
+    auto loc = sf::Vector2f((nodeWidth/2)*col+9, nodeHeight * row);
     
     
     if (col >= firstInRow && col < m_width - firstInRow  && (((col - firstInRow) % 2) == 0))

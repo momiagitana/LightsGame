@@ -1,8 +1,12 @@
 
 #include <LevelBuilder.h>
 
+#include "Bfs.h"
+
+
 int main()
 {
+
     auto window = sf::RenderWindow(sf::VideoMode(1000, 800), "LIGHTS GAME");
 
     LevelBuilder level (1, window.getSize());
@@ -33,3 +37,4 @@ int main()
         }
     }
 }
+

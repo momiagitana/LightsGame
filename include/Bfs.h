@@ -5,13 +5,11 @@
 #include <queue>
 #include <list>
 
-using namespace std;
-
-class Graph 
+class Bfs 
 {
 public:
 
-    Graph(int);
+    Bfs(int);
 
     void BFS(int s) ;
     void addEdge(int , int );
@@ -20,6 +18,6 @@ public:
 
 private:
 
-    std::vector< vector<int> > m_edge;
+    std::vector< std::vector<int> > m_edge;
     std::vector<bool> m_visited;
 };

@@ -1,17 +1,17 @@
 #include "Bfs.h"
 
-Graph::Graph(const int graphSize) 
+Bfs::Bfs(const int graphSize) 
 {
     m_edge.resize(graphSize);
     m_visited.resize(graphSize);
 }
 
-void Graph::addEdge(int src, int dest) 
+void Bfs::addEdge(int src, int dest) 
 { 
     m_edge[src].push_back(dest);
 } 
 
-void Graph::removeEdge(int src, int dst)
+void Bfs::removeEdge(int src, int dst)
 {
     for(auto i = m_edge[src].begin() ; i != m_edge[src].end(); i++)
             if(*i == dst)
@@ -19,7 +19,7 @@ void Graph::removeEdge(int src, int dst)
     
 }  
 
-void Graph::BFS(int s)
+void Bfs::BFS(int s)
 {
     std::list<int> q;
 
@@ -44,7 +44,7 @@ void Graph::BFS(int s)
     }
 }
 
-bool Graph::checkIfConnected()
+bool Bfs::checkIfConnected()
 {
     for(auto i : m_visited)
         if(!i)

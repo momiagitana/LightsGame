@@ -1,7 +1,7 @@
 #pragma once
 
 
-class Graph 
+class Bfs 
 
 {
 private:

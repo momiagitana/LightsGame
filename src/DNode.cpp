@@ -98,8 +98,6 @@ void DNode::handleClick(sf::Event click, sf::Vector2f mouseLoc)
 
         checkTouches();
     }
-
-
 }
 
 void DNode::addNeighbour(std::shared_ptr<DNode> newNei, int index)
@@ -109,17 +107,24 @@ void DNode::addNeighbour(std::shared_ptr<DNode> newNei, int index)
 
 void DNode::checkTouches()
 {
+    m_actualNeighbours.clear();
     for (int i = 0; i < m_legs.size(); i++)
-        if (m_legs[i] && m_potentialNeighbours[i] != nullptr) //check if can take nullptr
-            if(m_potentialNeighbours[i]->isTouching(this))//
-            {
-                m_on = true;
-                m_actualNeighbours.push_back(m_potentialNeighbours[i]->getName());
+        if (m_potentialNeighbours[i] != nullptr) //check if can take nullptr
+        {
+            if (m_legs[i])
+            { 
+                if(m_potentialNeighbours[i]->isTouching(this))//
+                {
+                    m_on = true;
+                    m_actualNeighbours.push_back(m_potentialNeighbours[i]->getName());
+                }
             }
-            else
+            else //i dont have a leg pointing at him so im not his neighbour
             {
-                removeNeighbour(m_potentialNeighbours[i]->getName());
+                m_potentialNeighbours[i]->removeNeighbour(getName());
             }
+        }
+        
     //need to call here bfs ???
 }
 
@@ -131,20 +136,15 @@ bool DNode::isTouching(DNode* calledMe)
             m_on = true;
             m_actualNeighbours.push_back(calledMe->getName());
             return true;
-        }
-        else
-        {
-            removeNeighbour(calledMe->getName());
-        }
-        
-    
+        }        
+
     return false;
 }
 
 void DNode::removeNeighbour(int toRemove)
 {
-    for(auto& i : m_actualNeighbours)
-        if(i == toRemove)
+    for(auto i = 0; i <m_actualNeighbours.size(); i++)
+        if(m_actualNeighbours[i] == toRemove)
             m_actualNeighbours.erase(m_actualNeighbours.begin() + i);
 }
 

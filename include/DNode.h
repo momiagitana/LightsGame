@@ -35,6 +35,7 @@ public:
     void addNeighbour(std::shared_ptr<DNode>, int);
     bool isTouching(DNode*);
     void initLegs(std::vector<bool>);
+    void takeLeg(int);
     
 
 

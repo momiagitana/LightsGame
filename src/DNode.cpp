@@ -53,7 +53,7 @@ void DNode::drawEdges(sf::RenderWindow& win, const sf::CircleShape& circle) cons
 
     sf::RectangleShape edge;
     edge.setFillColor(sf::Color::White);
-    edge.setSize(sf::Vector2f(m_unit*2, 1.0f));
+    edge.setSize(sf::Vector2f(m_unit, 1.0f));
     edge.setOrigin(sf::Vector2f(0, 0.5));
     edge.setPosition(m_loc);
 
@@ -130,4 +130,9 @@ bool DNode::isTouching(DNode* calledMe)
         }
     
     return false;
+}
+
+void DNode::takeLeg(int leg)
+{
+    m_legs[leg] = 0;
 }

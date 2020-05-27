@@ -6,7 +6,7 @@
 
 int main()
 {
-    auto window = sf::RenderWindow(sf::VideoMode(600, 600), "LIGHTS GAME");
+    auto window = sf::RenderWindow(sf::VideoMode(600, 750), "LIGHTS GAME");
 
     LevelBuilder level (1, window.getSize());
     DGraph graph =  level.build();

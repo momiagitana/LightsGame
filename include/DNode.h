@@ -23,12 +23,12 @@ private:
     void shiftR();
     bool contains(sf::Vector2f) const;
     bool isTouching(std::shared_ptr<DNode>) const;
-    void checkTouches();
     
 
 
 public:
 
+    void checkTouches();
     void draw(sf::RenderWindow&) const;
     void drawEdges(sf::RenderWindow&, const sf::CircleShape&) const;
     sf::CircleShape makeCircle() const;

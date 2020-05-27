@@ -43,6 +43,9 @@ DGraph LevelBuilder::build()
                 setPotentialNeighbours(mat, row, col);
 
     
+    //make the actual level
+
+
     DGraph graph(mat);
     
     

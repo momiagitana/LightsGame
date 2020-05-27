@@ -124,8 +124,6 @@ void DNode::checkTouches()
                 m_potentialNeighbours[i]->removeNeighbour(getName());
             }
         }
-        
-    //need to call here bfs ???
 }
 
 bool DNode::isTouching(DNode* calledMe)

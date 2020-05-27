@@ -14,6 +14,11 @@ DGraph::DGraph(matOfNodes mat)
                 counter++;
             }
 
+    for (auto& i : m_nodes)
+    {
+        i->checkTouches();
+    }
+
 }
 
 DGraph::~DGraph()
@@ -30,6 +35,7 @@ void DGraph::handleClick(sf::Event click, sf::Vector2f mouseLoc)
     for (auto& node : m_nodes)
         node->handleClick(click, mouseLoc);
 
+    
     //i think here is the best loc to check bfs
 }
 

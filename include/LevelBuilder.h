@@ -22,6 +22,7 @@ private:
 
     void nullOrNode(matOfNodes&, int, int);
     void setPotentialNeighbours(matOfNodes&, int, int);
+    void randomizeLevel(DGraph&) const;
 
 public:
     LevelBuilder(int, sf::Vector2u);

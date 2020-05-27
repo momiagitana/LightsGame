@@ -25,6 +25,33 @@ DGraph::~DGraph()
 {   
 }
 
+void DGraph::removeLeg(int node, int leg)
+{
+    m_nodes[node]->takeLeg(leg);
+}
+
+void DGraph::addLeg(int node, int leg)
+{
+    m_nodes[node]->addLeg(leg);
+}
+
+void DGraph::spinEmRound()
+{
+    int times;
+    for(auto& node : m_nodes)
+    {
+        times = rand()%6; //change for const
+        while(times--)
+            node->shiftL();
+    }
+
+}
+
+int DGraph::getAmountOfNodes() const
+{
+    return m_nodes.size();
+}
+
 void DGraph::addNode(std::shared_ptr<DNode> newNode)
 {
     m_nodes.push_back(newNode);
@@ -35,10 +62,7 @@ void DGraph::handleClick(sf::Event click, sf::Vector2f mouseLoc)
     for (auto& node : m_nodes)
         node->handleClick(click, mouseLoc);
 
-    bfs((m_nodes.size() + 1)/2);
-
-//need to decide what to do with this
-   // checkConnected();
+    bfs();
 
 }
 
@@ -48,14 +72,17 @@ void DGraph::draw(sf::RenderWindow& win)
         node->draw(win);
 }
 
-void DGraph::bfs(int source)
+bool DGraph::bfs()
 {
+
+    int source = (m_nodes.size() - 1) / 2;
+
     std::list<int> q;
 
     for(auto i : m_nodes) 
         i->setStatus(false);
 
-//starting source off as true
+    //starting source off as true
     m_nodes[source]->setStatus(true);
 
     q.push_back(source);
@@ -76,6 +103,8 @@ void DGraph::bfs(int source)
             }
         }
     }
+
+    return checkConnected();
 }
 
 

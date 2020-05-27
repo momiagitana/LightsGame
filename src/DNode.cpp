@@ -80,11 +80,13 @@ bool DNode::contains(sf::Vector2f loc) const
 void DNode::shiftR()
 {
     std::rotate(m_legs.begin(),m_legs.end()-1,m_legs.end());
+    checkTouches();
 }
 
 void DNode::shiftL()
 {
     std::rotate(m_legs.begin(), m_legs.begin()+1, m_legs.end());
+    checkTouches();
 }
 
 void DNode::handleClick(sf::Event click, sf::Vector2f mouseLoc)
@@ -95,8 +97,6 @@ void DNode::handleClick(sf::Event click, sf::Vector2f mouseLoc)
             shiftR();
         if (click.mouseButton.button == sf::Mouse::Left)
             shiftL();
-
-        checkTouches();
     }
 }
 
@@ -108,21 +108,19 @@ void DNode::addNeighbour(std::shared_ptr<DNode> newNei, int index)
 void DNode::checkTouches()
 {
     m_actualNeighbours.clear();
+
     for (int i = 0; i < m_legs.size(); i++)
         if (m_potentialNeighbours[i] != nullptr) //check if can take nullptr
         {
-            if (m_legs[i])
-            { 
-                if(m_potentialNeighbours[i]->isTouching(this))//
-                {
-                    m_on = true;
-                    m_actualNeighbours.push_back(m_potentialNeighbours[i]->getName());
-                }
+            if (m_legs[i] && m_potentialNeighbours[i]->isTouching(this))//
+            {
+                m_actualNeighbours.push_back(m_potentialNeighbours[i]->getName());
             }
             else //i dont have a leg pointing at him so im not his neighbour
             {
                 m_potentialNeighbours[i]->removeNeighbour(getName());
             }
+
         }
 }
 
@@ -131,12 +129,21 @@ bool DNode::isTouching(DNode* calledMe)
     for(int i = 0; i < m_potentialNeighbours.size(); i++)
         if (m_potentialNeighbours[i].get() == calledMe && m_legs[i])
         {
-            m_on = true;
-            m_actualNeighbours.push_back(calledMe->getName());
+            if(notMyNeighbour(calledMe->getName()))
+                m_actualNeighbours.push_back(calledMe->getName());
             return true;
         }        
 
     return false;
+}
+
+bool DNode::notMyNeighbour(int name) const
+{
+    for (auto& i : m_actualNeighbours)
+        if (i == name)
+            return false;
+    
+    return true;
 }
 
 void DNode::removeNeighbour(int toRemove)
@@ -158,9 +165,21 @@ int DNode::getName()
 
 void DNode::takeLeg(int leg)
 {
-    m_legs[leg] = 0;
+    if (m_legs[leg])
+    {
+        m_legs[leg] = 0;
+        checkTouches();
+    }
 }
 
+void DNode::addLeg(int leg)
+{
+    if(!m_legs[leg])
+    {
+        m_legs[leg] = 1;
+        checkTouches();
+    }
+}
 
 void DNode::setStatus(const bool status)
 {

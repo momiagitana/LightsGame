@@ -1,5 +1,6 @@
 #include <LevelBuilder.h>
 #include <math.h>
+#include <time.h>
 
 
 LevelBuilder::LevelBuilder(int level, sf::Vector2u winSize)
@@ -43,15 +44,43 @@ DGraph LevelBuilder::build()
                 setPotentialNeighbours(mat, row, col);
 
     
-    //make the actual level
-
-
+    
     DGraph graph(mat);
     
-    
+    randomizeLevel(graph);
 
     return graph;
 
+}
+
+void LevelBuilder::randomizeLevel(DGraph& graph) const
+{
+    srand (time(NULL));
+    int node;
+    int leg;
+
+    while(graph.bfs())
+    {
+        node = rand() % graph.getAmountOfNodes();
+        leg = rand() % 6; //change for const
+        graph.removeLeg(node, leg);
+    }
+    graph.addLeg(node, leg);
+
+    for (int i = 0; i < graph.getAmountOfNodes(); i++)
+    {
+        for (leg = 0; leg < 6; leg++)
+        {
+            graph.removeLeg(i, leg);
+            if (!graph.bfs())
+                graph.addLeg(i, leg);
+        }
+    }
+
+    graph.spinEmRound();
+
+    graph.bfs();
+    
 }
 
 void LevelBuilder::setPotentialNeighbours(matOfNodes& mat, int row, int col)

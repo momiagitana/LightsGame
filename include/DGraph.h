@@ -14,12 +14,20 @@ private:
 
     //Bfs m_bfsChecker;
     
+    bool checkConnected();
 
 public:
 
     void addNode(std::shared_ptr<DNode>);
     void handleClick(sf::Event, sf::Vector2f);
     void draw(sf::RenderWindow&);
+    bool bfs();
+    void removeLeg(int, int);
+    void addLeg(int, int);
+    int getAmountOfNodes() const;
+    void spinEmRound();
+    void nextLevelAnimation(sf::RenderWindow&);
+
     DGraph(matOfNodes);
     ~DGraph();
 };

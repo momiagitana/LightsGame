@@ -12,6 +12,7 @@ private:
     std::vector <bool> m_legs;
     lineOfNodes m_potentialNeighbours;
     std::vector<int> m_actualNeighbours;
+    
 
     float m_unit;
     sf::Vector2f m_loc;
@@ -19,8 +20,6 @@ private:
     int m_name;
 
 
-    void shiftL();
-    void shiftR();
     bool contains(sf::Vector2f) const;
     bool isTouching(std::shared_ptr<DNode>) const;
     
@@ -28,6 +27,8 @@ private:
 
 public:
 
+    void shiftL();
+    void shiftR();
     void checkTouches();
     void draw(sf::RenderWindow&) const;
     void drawEdges(sf::RenderWindow&, const sf::CircleShape&) const;
@@ -40,6 +41,12 @@ public:
     int  getName();
     void removeNeighbour(int toRemove);
     void takeLeg(int);
+    void addLeg(int);
+    void setStatus(bool);
+    bool getStatus() const;
+    int getCurrNeighbour(int);
+    int vecSize();
+    bool notMyNeighbour(int) const;
 
     
 

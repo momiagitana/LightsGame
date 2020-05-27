@@ -6,18 +6,6 @@ Bfs::Bfs(const int graphSize)
     m_visited.resize(graphSize);
 }
 
-void Bfs::addEdge(int src, int dest) 
-{ 
-    m_edge[src].push_back(dest);
-} 
-
-void Bfs::removeEdge(int src, int dst)
-{
-    for(auto i = m_edge[src].begin() ; i != m_edge[src].end(); i++)
-            if(*i == dst)
-                m_edge[src].erase(i);
-    
-}  
 
 void Bfs::BFS(int s)
 {

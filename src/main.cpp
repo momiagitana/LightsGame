@@ -1,39 +1,49 @@
-
 #include <LevelBuilder.h>
-
-#include "Bfs.h"
 
 
 int main()
 {
     auto window = sf::RenderWindow(sf::VideoMode(600, 750), "LIGHTS GAME");
+    auto levelNum = 1;
 
-    LevelBuilder level (1, window.getSize());
-    DGraph graph =  level.build();
-
-    while (window.isOpen())
+    
+    while(levelNum <= 3)
     {
-        window.clear();
-        graph.draw(window);
-        window.display();
+        LevelBuilder level (levelNum++, window.getSize());
+        DGraph graph =  level.build();
+        bool wonLevel = false;
 
-        if (auto event = sf::Event{}; window.waitEvent(event))
+        while (window.isOpen())
         {
-            switch (event.type)
+            window.clear();
+            graph.draw(window);
+            window.display();
+
+            if (auto event = sf::Event{}; window.waitEvent(event))
             {
-            case sf::Event::Closed:
-                window.close();
-                break;
+                switch (event.type)
+                {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
 
-            case sf::Event::MouseButtonReleased:
-                
-                auto mouseLoc = window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y });
-                graph.handleClick(event, mouseLoc);
+                case sf::Event::MouseButtonReleased:
+                    
+                    auto mouseLoc = window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y });
+                    graph.handleClick(event, mouseLoc);
+                    if(graph.bfs())
+                        wonLevel = true;
+                    break;
+                }
 
+            }
+            if(wonLevel)
+            {
+                //use a clock and display NEXT LEVEL!
                 break;
             }
+        }//somewhere add you finished the game you must be a fkin genius
 
-        }
     }
 }
 

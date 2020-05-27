@@ -1,4 +1,6 @@
 #include <DGraph.h>
+#include <unistd.h>
+
 
 DGraph::DGraph(matOfNodes mat)
 {
@@ -44,6 +46,25 @@ void DGraph::spinEmRound()
         while(times--)
             node->shiftL();
     }
+
+}
+
+void DGraph::nextLevelAnimation(sf::RenderWindow& window)
+{
+    int times;
+    for(auto& node : m_nodes)
+    {
+        times = rand()%6; //change for const
+        while(times--)
+        {
+            node->shiftL();
+            window.clear();
+            draw(window);
+            window.display();
+            usleep(3000);
+        }
+    }
+
 
 }
 

@@ -26,6 +26,7 @@ public:
     void addLeg(int, int);
     int getAmountOfNodes() const;
     void spinEmRound();
+    void nextLevelAnimation(sf::RenderWindow&);
 
     DGraph(matOfNodes);
     ~DGraph();

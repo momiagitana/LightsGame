@@ -12,6 +12,7 @@ private:
     std::vector <bool> m_legs;
     lineOfNodes m_potentialNeighbours;
     std::vector<int> m_actualNeighbours;
+    
 
     float m_unit;
     sf::Vector2f m_loc;
@@ -40,6 +41,10 @@ public:
     int  getName();
     void removeNeighbour(int toRemove);
     void takeLeg(int);
+    void setStatus(bool);
+    bool getStatus() const;
+    int getCurrNeighbour(int);
+    int vecSize();
 
     
 

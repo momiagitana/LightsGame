@@ -20,6 +20,8 @@ public:
     void addNode(std::shared_ptr<DNode>);
     void handleClick(sf::Event, sf::Vector2f);
     void draw(sf::RenderWindow&);
+    void bfs(int);
+    bool checkConnected();
     DGraph(matOfNodes);
     ~DGraph();
 };

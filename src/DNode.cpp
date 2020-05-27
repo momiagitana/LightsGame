@@ -161,3 +161,23 @@ void DNode::takeLeg(int leg)
     m_legs[leg] = 0;
 }
 
+
+void DNode::setStatus(const bool status)
+{
+    m_on = status;
+}
+
+bool DNode::getStatus() const
+{
+    return m_on;
+}
+
+int DNode::getCurrNeighbour(int pos)
+{
+    return m_actualNeighbours[pos];
+}
+
+int DNode::vecSize()
+{
+    return m_actualNeighbours.size();
+}

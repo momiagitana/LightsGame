@@ -35,12 +35,57 @@ void DGraph::handleClick(sf::Event click, sf::Vector2f mouseLoc)
     for (auto& node : m_nodes)
         node->handleClick(click, mouseLoc);
 
-    
-    //i think here is the best loc to check bfs
+    bfs((m_nodes.size() + 1)/2);
+
+//need to decide what to do with this
+   // checkConnected();
+
 }
 
 void DGraph::draw(sf::RenderWindow& win)
 {
     for (auto node : m_nodes)
         node->draw(win);
+}
+
+void DGraph::bfs(int source)
+{
+    std::list<int> q;
+
+    for(auto i : m_nodes) 
+        i->setStatus(false);
+
+//starting source off as true
+    m_nodes[source]->setStatus(true);
+
+    q.push_back(source);
+
+    while (!q.empty())
+    {
+        source = q.front();
+        q.pop_front();
+
+        for(auto i = 0 ; i < m_nodes[source]->vecSize() ; i++)
+        {
+            auto currNeighour = m_nodes[source]->getCurrNeighbour(i);
+
+            if(!(m_nodes[currNeighour]->getStatus()))
+            {
+                m_nodes[currNeighour]->setStatus(true);
+                q.push_back(m_nodes[currNeighour]->getName());
+            }
+        }
+    }
+}
+
+
+bool DGraph::checkConnected()
+{
+    for(auto i : m_nodes)
+    {
+        if(!i->getStatus())
+        return false;
+    }
+
+    return true;
 }

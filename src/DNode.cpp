@@ -1,4 +1,5 @@
 #include <DNode.h>
+#include <iostream>
 
 
 DNode::DNode(sf::Vector2f loc, float unit)
@@ -41,7 +42,6 @@ sf::CircleShape DNode::makeCircle() const
 {
     sf::CircleShape circle(CIRCLE_SIZE);
 
-    circle.setPointCount(60);
     circle.setPosition(m_loc);
     circle.setOrigin(circle.getGlobalBounds().width/2, circle.getGlobalBounds().height/2);
     
@@ -53,17 +53,15 @@ void DNode::drawEdges(sf::RenderWindow& win, const sf::CircleShape& circle) cons
 
     sf::RectangleShape edge;
     edge.setFillColor(sf::Color::White);
-    edge.setSize(sf::Vector2f(m_unit*2, 2.0f));
+    edge.setSize(sf::Vector2f(m_unit, 1.0f));
+    edge.setOrigin(sf::Vector2f(0, 0.5));
+    edge.setPosition(m_loc);
 
-    sf::CircleShape middle(1,60);
-    middle.setOrigin(middle.getGlobalBounds().width/2, middle.getGlobalBounds().height/2);
-    middle.setPosition(m_loc);
     
     for (int i = 0; i < m_legs.size(); i++)
     {
         if (m_legs[i])
         {
-            edge.setPosition(middle.getTransform().transformPoint(middle.getPoint(i*10)));
             edge.setRotation(i*60.0f);
             win.draw(edge);
         }
@@ -159,3 +157,9 @@ int DNode::getName()
 {
     return m_name;
 }
+
+void DNode::takeLeg(int leg)
+{
+    m_legs[leg] = 0;
+}
+

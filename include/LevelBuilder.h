@@ -8,11 +8,17 @@ class LevelBuilder
 {
 private:
     int m_midRow;
-    int m_width;
-    int m_height;
+
+    int m_cols;
+    int m_rows;
+
     std::vector<int> m_sizes;
     float m_unitx;
-    float m_unity;
+
+    int m_nodeWidth;
+    int m_nodeHeight;
+
+    int m_topPad;
 
     void nullOrNode(matOfNodes&, int, int);
     void setPotentialNeighbours(matOfNodes&, int, int);

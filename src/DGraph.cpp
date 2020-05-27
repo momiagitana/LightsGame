@@ -9,9 +9,11 @@ DGraph::DGraph(matOfNodes mat)
             if (mat[row][col] != nullptr)
             {
                 m_nodes.push_back(mat[row][col]);
+
                 mat[row][col]->setName(counter);
                 counter++;
             }
+
 }
 
 DGraph::~DGraph()

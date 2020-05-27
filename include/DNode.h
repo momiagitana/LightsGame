@@ -39,6 +39,8 @@ public:
     void setName(int);
     int  getName();
     void removeNeighbour(int toRemove);
+    void takeLeg(int);
+
     
 
 

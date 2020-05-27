@@ -112,12 +112,15 @@ void DNode::checkTouches()
     for (int i = 0; i < m_legs.size(); i++)
         if (m_legs[i] && m_potentialNeighbours[i] != nullptr) //check if can take nullptr
             if(m_potentialNeighbours[i]->isTouching(this))//
-                m_on = true; //add to list
-            // else
-            // {
-            //     //take it off from list
-            // }
-            
+            {
+                m_on = true;
+                m_actualNeighbours.push_back(m_potentialNeighbours[i]->getName());
+            }
+            else
+            {
+                removeNeighbour(m_potentialNeighbours[i]->getName());
+            }
+    //need to call here bfs ???
 }
 
 bool DNode::isTouching(DNode* calledMe)
@@ -126,13 +129,37 @@ bool DNode::isTouching(DNode* calledMe)
         if (m_potentialNeighbours[i].get() == calledMe && m_legs[i])
         {
             m_on = true;
+            m_actualNeighbours.push_back(calledMe->getName());
             return true;
         }
+        else
+        {
+            removeNeighbour(calledMe->getName());
+        }
+        
     
     return false;
+}
+
+void DNode::removeNeighbour(int toRemove)
+{
+    for(auto& i : m_actualNeighbours)
+        if(i == toRemove)
+            m_actualNeighbours.erase(m_actualNeighbours.begin() + i);
+}
+
+void DNode::setName(int name)
+{
+    m_name = name;
+}
+
+int DNode::getName()
+{
+    return m_name;
 }
 
 void DNode::takeLeg(int leg)
 {
     m_legs[leg] = 0;
 }
+

@@ -16,6 +16,7 @@ private:
     float m_unit;
     sf::Vector2f m_loc;
     bool m_on = false;
+    int m_name;
 
 
     void shiftL();
@@ -35,7 +36,11 @@ public:
     void addNeighbour(std::shared_ptr<DNode>, int);
     bool isTouching(DNode*);
     void initLegs(std::vector<bool>);
+    void setName(int);
+    int  getName();
+    void removeNeighbour(int toRemove);
     void takeLeg(int);
+
     
 
 

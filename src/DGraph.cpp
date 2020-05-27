@@ -2,13 +2,16 @@
 
 DGraph::DGraph(matOfNodes mat)
 {
+    auto counter = 0;
+
     for (int row = 0; row < mat.size(); row++)
         for (int col = 0; col < mat[0].size(); col++)
             if (mat[row][col] != nullptr)
             {
                 m_nodes.push_back(mat[row][col]);
-                // mat[row][col]->setName(counter);
-                // counter++;
+
+                mat[row][col]->setName(counter);
+                counter++;
             }
 
 }
@@ -26,6 +29,8 @@ void DGraph::handleClick(sf::Event click, sf::Vector2f mouseLoc)
 {
     for (auto& node : m_nodes)
         node->handleClick(click, mouseLoc);
+
+    //i think here is the best loc to check bfs
 }
 
 void DGraph::draw(sf::RenderWindow& win)

@@ -4,10 +4,10 @@
 int main()
 {
     auto window = sf::RenderWindow(sf::VideoMode(600, 750), "LIGHTS GAME");
-    auto levelNum = 1;
+    auto levelNum = 4;
 
     
-    while(levelNum <= 3)
+    while(levelNum <= 5)
     {
         LevelBuilder level (levelNum++, window.getSize());
         DGraph graph =  level.build();

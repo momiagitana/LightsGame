@@ -126,3 +126,4 @@ void LevelBuilder::nullOrNode(matOfNodes & mat, int row, int col)
 //  [ 0, 1, 0, 1, 0, 1, 0, 1, 0 ]
 //  [ 0, 0, 1, 0, 1, 0, 1, 0, 0 ]
 //
+// {{0, 2}, {1, 1}, {1,-1}, {0,-2}, {-1,-1}, {-1,1}}; //move to consts

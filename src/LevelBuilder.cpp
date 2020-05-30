@@ -3,8 +3,10 @@
 #include <time.h>
 
 
-LevelBuilder::LevelBuilder(int level, sf::Vector2u winSize)
+LevelBuilder::LevelBuilder(const int level, const sf::Vector2u winSize)
 {
+    srand (time(NULL)); // mabey not best place
+
     m_midRow = MID_ROW_BASE + (level - 1)*2;
 
     m_cols = m_midRow * 2 - 1;
@@ -55,27 +57,28 @@ DGraph LevelBuilder::build()
 
 void LevelBuilder::randomizeLevel(DGraph& graph) const
 {
-    srand (time(NULL));
     int node;
     int leg;
 
     while(graph.bfs())
     {
         node = rand() % graph.getAmountOfNodes();
-        leg = rand() % 6; //change for const
+        leg = rand() % MOD_6; 
         graph.removeLeg(node, leg);
     }
     graph.addLeg(node, leg);
 
-    for (int i = 0; i < graph.getAmountOfNodes(); i++)
-    {
-        for (leg = 0; leg < 6; leg++)
-        {
-            graph.removeLeg(i, leg);
-            if (!graph.bfs())
-                graph.addLeg(i, leg);
-        }
-    }
+    // for (int i = 0; i < graph.getAmountOfNodes(); i++)
+    // {
+    //     for (leg = 0; leg < 6; leg++)
+    //     {
+    //         graph.removeLeg(i, leg);
+    //         if (!graph.bfs())
+    //             graph.addLeg(i, leg);
+    //     }
+    // }
+
+    removeMaxLegs(graph);
 
     graph.spinEmRound();
 
@@ -83,7 +86,20 @@ void LevelBuilder::randomizeLevel(DGraph& graph) const
     
 }
 
-void LevelBuilder::setPotentialNeighbours(matOfNodes& mat, int row, int col)
+void LevelBuilder::removeMaxLegs(DGraph& graph) const
+{
+    for (auto i = 0; i < graph.getAmountOfNodes(); i++)
+    {
+        for (auto leg = 0; leg < 6; leg++)
+        {
+            graph.removeLeg(i, leg);
+            if (!graph.bfs())
+                graph.addLeg(i, leg);
+        }
+    }
+}
+
+void LevelBuilder::setPotentialNeighbours(matOfNodes& mat, const int row, const int col)
 {
     int neigbDiff [6][2]=  {{0, 2}, {1, 1}, {1,-1}, {0,-2}, {-1,-1}, {-1,1}}; //move to consts
     
@@ -104,7 +120,7 @@ void LevelBuilder::setPotentialNeighbours(matOfNodes& mat, int row, int col)
     mat[row][col]->initLegs(legs);
 }
 
-void LevelBuilder::nullOrNode(matOfNodes & mat, int row, int col)
+void LevelBuilder::nullOrNode(matOfNodes & mat, const int row, const int col)
 {
  
     int firstInRow = m_midRow - m_sizes[row];

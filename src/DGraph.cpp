@@ -1,7 +1,6 @@
 #include <DGraph.h>
 #include <unistd.h>
 
-
 DGraph::DGraph(matOfNodes mat)
 {
     auto counter = 0;
@@ -27,12 +26,12 @@ DGraph::~DGraph()
 {   
 }
 
-void DGraph::removeLeg(int node, int leg)
+void DGraph::removeLeg(const int node, const int leg)
 {
     m_nodes[node]->takeLeg(leg);
 }
 
-void DGraph::addLeg(int node, int leg)
+void DGraph::addLeg(const int node, const int leg)
 {
     m_nodes[node]->addLeg(leg);
 }
@@ -40,9 +39,10 @@ void DGraph::addLeg(int node, int leg)
 void DGraph::spinEmRound()
 {
     int times;
+
     for(auto& node : m_nodes)
     {
-        times = rand()%6; //change for const
+        times = rand() % MOD_6; 
         while(times--)
             node->shiftL();
     }
@@ -52,9 +52,10 @@ void DGraph::spinEmRound()
 void DGraph::nextLevelAnimation(sf::RenderWindow& window)
 {
     int times;
+
     for(auto& node : m_nodes)
     {
-        times = rand()%6; //change for const
+        times = rand() % MOD_6; 
         while(times--)
         {
             node->shiftL();
@@ -78,12 +79,12 @@ void DGraph::addNode(std::shared_ptr<DNode> newNode)
     m_nodes.push_back(newNode);
 }
 
-void DGraph::handleClick(sf::Event click, sf::Vector2f mouseLoc)
+void DGraph::handleClick(const sf::Event click, const sf::Vector2f mouseLoc)
 {
     for (auto& node : m_nodes)
         node->handleClick(click, mouseLoc);
 
-    bfs();
+    bfs(); //to we need return value for anything?
 
 }
 
@@ -95,7 +96,7 @@ void DGraph::draw(sf::RenderWindow& win)
 
 bool DGraph::bfs()
 {
-
+    //getting the center node
     int source = (m_nodes.size() - 1) / 2;
 
     std::list<int> q;
@@ -103,7 +104,6 @@ bool DGraph::bfs()
     for(auto i : m_nodes) 
         i->setStatus(false);
 
-    //starting source off as true
     m_nodes[source]->setStatus(true);
 
     q.push_back(source);
@@ -113,7 +113,7 @@ bool DGraph::bfs()
         source = q.front();
         q.pop_front();
 
-        for(auto i = 0 ; i < m_nodes[source]->vecSize() ; i++)
+        for(auto i = 0 ; i < m_nodes[source]->vecNeighboursSize() ; i++)
         {
             auto currNeighour = m_nodes[source]->getCurrNeighbour(i);
 
@@ -129,7 +129,7 @@ bool DGraph::bfs()
 }
 
 
-bool DGraph::checkConnected()
+bool DGraph::checkConnected() const
 {
     for(auto i : m_nodes)
     {
@@ -138,4 +138,20 @@ bool DGraph::checkConnected()
     }
 
     return true;
+}
+
+void DGraph::printMessage(const int levelNum)
+{
+    char c;
+
+    std::cout << "Great work you passed level num :" << levelNum << std::endl;
+    std::cout << "Please enter any key to continue to next level." << std::endl;
+
+    c = std::getchar();
+}
+
+void DGraph::wonGame()
+{
+    std::cout << " Conratulations you won the game, Einstein would be proud of you !!!!!!! " << std::endl;
+    std::cout << " Now dont we deserve a good grade ?! " << std::endl;
 }

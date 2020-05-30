@@ -20,12 +20,13 @@ private:
 
     int m_topPad;
 
-    void nullOrNode(matOfNodes&, int, int);
-    void setPotentialNeighbours(matOfNodes&, int, int);
+    void nullOrNode(matOfNodes&, const int, const int);
+    void setPotentialNeighbours(matOfNodes&, const int, const int);
     void randomizeLevel(DGraph&) const;
+    void removeMaxLegs(DGraph&) const;
 
 public:
-    LevelBuilder(int, sf::Vector2u);
+    LevelBuilder(const int, const sf::Vector2u);
     ~LevelBuilder();
 
     DGraph build();

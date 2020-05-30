@@ -26,7 +26,7 @@ public:
     int getAmountOfNodes() const;
     void spinEmRound();
     void nextLevelAnimation(sf::RenderWindow&);
-    void printMessage(const int);
+    void printMessage( int);
     void wonGame();
 
     DGraph(matOfNodes);

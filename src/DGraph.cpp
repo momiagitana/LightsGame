@@ -140,11 +140,11 @@ bool DGraph::checkConnected() const
     return true;
 }
 
-void DGraph::printMessage(const int levelNum)
+void DGraph::printMessage( int levelNum)
 {
     char c;
 
-    std::cout << "Great work you passed level num :" << levelNum << std::endl;
+    std::cout << "Great work you passed level num :" << --levelNum << std::endl;
     std::cout << "Please enter any key to continue to next level." << std::endl;
 
     c = std::getchar();
@@ -152,6 +152,6 @@ void DGraph::printMessage(const int levelNum)
 
 void DGraph::wonGame()
 {
-    std::cout << " Conratulations you won the game, Einstein would be proud of you !!!!!!! " << std::endl;
-    std::cout << " Now dont we deserve a good grade ?! " << std::endl;
+    std::cout << "Conratulations you won the game, Einstein would be proud of you !!!!!!! " << std::endl;
+    std::cout << "Now dont we deserve a good grade ?! " << std::endl;
 }

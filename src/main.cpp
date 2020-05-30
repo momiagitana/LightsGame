@@ -35,21 +35,22 @@ int main()
                     if(graph.bfs())
                     {
                         wonLevel = true;
+                        break;
                         
                     }
-                    break;
                 }
 
             }
+            
             if(wonLevel)
             {
-                //graph.printMessage(levelNum);
+                graph.printMessage(levelNum);
                 //use a clock and display NEXT LEVEL!
                 break;
             }
         }
-        // if(wonLevel && levelNum == 3)
-        //     graph.wonGame();
+        if(wonLevel && levelNum > 3)
+            graph.wonGame();
     }
     
 }

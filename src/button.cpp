@@ -4,7 +4,7 @@
 
 Button::Button(sf::Vector2f loc)
 {
-	m_texture.loadFromFile("/Users/arielzingman/OOP2/EX4Lights/LightsGame/build/next.png");
+	m_texture.loadFromFile("next.png");
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(loc);
 		m_sprite.scale((NEXT_SIZE / m_sprite.getGlobalBounds().width), (NEXT_SIZE / m_sprite.getGlobalBounds().height));

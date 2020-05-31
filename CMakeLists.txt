@@ -9,30 +9,42 @@ if (MSVC)
     add_compile_options (/permissive-)
 endif ()
 # macOS specific options
-#if(SFML_OS_MACOSX)
-    # add an option to build frameworks instead of dylibs (release only)
-#    sfml_set_option(SFML_BUILD_FRAMEWORKS FALSE BOOL "TRUE to build SFML as frameworks libraries (release only), FALSE to build according to BUILD_SHARED_LIBS")
+if(SFML_OS_MACOSX)
 
-    # add an option to automatically install Xcode templates
-    #sfml_set_option(SFML_INSTALL_XCODE_TEMPLATES FALSE BOOL "TRUE to automatically install the Xcode templates, FALSE to do nothing about it. The templates are compatible with Xcode 4 and 5.")
-#endif()
+	add_executable (oop2_ex04 MACOSX_BUNDLE "")
 
-add_executable (oop2_ex04 MACOSX_BUNDLE "")
+	add_subdirectory (include)
+	add_subdirectory (src)
+	add_subdirectory (resources)
 
-add_subdirectory (include)
-add_subdirectory (src)
-add_subdirectory (resources)
+	set (SFML_STATIC_LIBRARIES FALSE)
+	set (SFML_DIR "/usr/local/Cellar/sfml/2.5.1")
 
-set (SFML_STATIC_LIBRARIES FALSE)
-#set (SFML_DIR "/Library/Frameworks/SFML.framework/Resources/CMake/SFMLConfig.cmake")
-set (SFML_DIR "/usr/local/Cellar/sfml/2.5.1")
 
-find_package (SFML 2.5 COMPONENTS graphics REQUIRED)
+	find_package (SFML 2.5 COMPONENTS graphics REQUIRED)
 
-set_target_properties ( PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO RELEASE)
+	set_target_properties ( PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO RELEASE)
 
-target_link_libraries (oop2_ex04 sfml-graphics)
+	target_link_libraries (oop2_ex04 sfml-graphics)
+ endif()
 
 
 
-# //"macFrameworkPath": ["/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"],
+ #if(SFML_OS_WIN)
+
+	add_executable (oop2_ex04 WIN32 "")
+
+	add_subdirectory (include)
+	add_subdirectory (src)
+	add_subdirectory (resources)
+
+	set (SFML_STATIC_LIBRARIES TRUE)
+	set (SFML_DIR "C:/SFML/SFML-2.5.1/lib/cmake/SFML")
+
+	find_package (SFML 2.5 COMPONENTS graphics REQUIRED)
+
+	set_target_properties (sfml-main sfml-system sfml-window sfml-graphics sfml-audio sfml-network PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO RELEASE)
+
+	target_link_libraries (oop2_ex04 sfml-graphics sfml-main)
+
+ #endif()

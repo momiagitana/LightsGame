@@ -83,7 +83,7 @@ void LevelBuilder::removeMaxLegs(DGraph& graph) const
         bool legs[LEGS] = {0, 0, 0, 0, 0, 0};
         while(!checkedEveryLeg(legs))
         { 
-            
+			leg = rand() % LEGS;
             while(legs[leg])
                 leg = rand() % LEGS;
             legs[leg] = 1;

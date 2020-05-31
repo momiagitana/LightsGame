@@ -89,7 +89,7 @@ void Controller::run()
 void Controller::won()
 {
     sf::Texture text;
-    text.loadFromFile("/Users/arielzingman/OOP2/EX4Lights/LightsGame/build/won.png");
+    text.loadFromFile("won.png");
     sf::Sprite won;
     won.setTexture(text);
     won.setOrigin(sf::Vector2f(won.getGlobalBounds().width/2,won. getGlobalBounds().height/2));

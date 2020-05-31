@@ -8,8 +8,9 @@ set (CMAKE_CXX_EXTENSIONS OFF)
 if (MSVC)
     add_compile_options (/permissive-)
 endif ()
-# macOS specific options
-if(SFML_OS_MACOSX)
+
+
+if(APPLE)
 
 	add_executable (oop2_ex04 MACOSX_BUNDLE "")
 
@@ -30,7 +31,7 @@ if(SFML_OS_MACOSX)
 
 
 
- #if(SFML_OS_WIN)
+ if(WIN32)
 
 	add_executable (oop2_ex04 WIN32 "")
 
@@ -47,4 +48,4 @@ if(SFML_OS_MACOSX)
 
 	target_link_libraries (oop2_ex04 sfml-graphics sfml-main)
 
- #endif()
+ endif()

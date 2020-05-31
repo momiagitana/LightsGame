@@ -1,2 +1,2 @@
-﻿#configure_file ("levels.txt" ${CMAKE_BINARY_DIR} COPYONLY)
-#configure_file ("level1.txt" ${CMAKE_BINARY_DIR} COPYONLY)
+﻿configure_file ("next.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("won.png" ${CMAKE_BINARY_DIR} COPYONLY)

@@ -46,7 +46,6 @@ DGraph LevelBuilder::build()
                 setPotentialNeighbours(mat, row, col);
 
     
-    
     DGraph graph(mat);
     
     randomizeLevel(graph);

@@ -1,6 +1,10 @@
 #include <DGraph.h>
 #include <unistd.h>
 
+DGraph::DGraph()
+{
+}
+
 DGraph::DGraph(matOfNodes mat)
 {
     auto counter = 0;
@@ -49,25 +53,22 @@ void DGraph::spinEmRound()
 
 }
 
-void DGraph::nextLevelAnimation(sf::RenderWindow& window)
-{
-    int times;
-
-    for(auto& node : m_nodes)
-    {
-        times = rand() % MOD_6; 
-        while(times--)
-        {
-            node->shiftL();
-            window.clear();
-            draw(window);
-            window.display();
-            usleep(3000);
-        }
-    }
-
-
-}
+// void DGraph::nextLevelAnimation(sf::RenderWindow& window)
+// {
+//     int times;
+//     for(auto& node : m_nodes)
+//     {
+//         times = rand() % MOD_6; 
+//         while(times--)
+//         {
+//             node->shiftL();
+//             window.clear();
+//             draw(window);
+//             window.display();
+//             usleep(3000);
+//         }
+//     }
+// }
 
 int DGraph::getAmountOfNodes() const
 {
@@ -140,18 +141,3 @@ bool DGraph::checkConnected() const
     return true;
 }
 
-void DGraph::printMessage( int levelNum)
-{
-    char c;
-
-    std::cout << "Great work you passed level num :" << --levelNum << std::endl;
-    std::cout << "Please enter any key to continue to next level." << std::endl;
-
-    c = std::getchar();
-}
-
-void DGraph::wonGame()
-{
-    std::cout << "Conratulations you won the game, Einstein would be proud of you !!!!!!! " << std::endl;
-    std::cout << "Now dont we deserve a good grade ?! " << std::endl;
-}

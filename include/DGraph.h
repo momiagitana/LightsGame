@@ -25,11 +25,10 @@ public:
     void addLeg(const int, const int);
     int getAmountOfNodes() const;
     void spinEmRound();
-    void nextLevelAnimation(sf::RenderWindow&);
-    void printMessage( int);
-    void wonGame();
+    //void nextLevelAnimation(sf::RenderWindow&);
 
     DGraph(matOfNodes);
+    DGraph();
     ~DGraph();
 };
 

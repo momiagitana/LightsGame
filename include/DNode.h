@@ -20,7 +20,7 @@ private:
     int m_name;
 
 
-    bool contains(sf::Vector2f) const;
+    bool contains(const sf::Vector2f) const;
     bool isTouching(std::shared_ptr<DNode>) const;
     
 
@@ -33,20 +33,20 @@ public:
     void draw(sf::RenderWindow&) const;
     void drawEdges(sf::RenderWindow&, const sf::CircleShape&) const;
     sf::CircleShape makeCircle() const;
-    void handleClick(sf::Event, sf::Vector2f);
-    void addNeighbour(std::shared_ptr<DNode>, int);
+    void handleClick(const sf::Event, const sf::Vector2f);
+    void addNeighbour(const std::shared_ptr<DNode>, const int);
     bool isTouching(DNode*);
-    void initLegs(std::vector<bool>);
-    void setName(int);
-    int  getName();
-    void removeNeighbour(int toRemove);
-    void takeLeg(int);
-    void addLeg(int);
+    void initLegs(const std::vector<bool>);
+    void setName(const int);
+    int  getName() const;
+    void removeNeighbour(const int toRemove);
+    void takeLeg(const int);
+    void addLeg(const int);
     void setStatus(bool);
     bool getStatus() const;
-    int getCurrNeighbour(int);
-    int vecSize();
-    bool notMyNeighbour(int) const;
+    int getCurrNeighbour(const int);
+    int vecNeighboursSize() const;
+    bool notMyNeighbour(const int) const;
 
     
 

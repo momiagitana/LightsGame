@@ -46,29 +46,13 @@ void DGraph::spinEmRound()
 
     for(auto& node : m_nodes)
     {
-        times = rand() % MOD_6; 
+        times = rand() % LEGS; 
         while(times--)
             node->shiftL();
     }
 
 }
 
-// void DGraph::nextLevelAnimation(sf::RenderWindow& window)
-// {
-//     int times;
-//     for(auto& node : m_nodes)
-//     {
-//         times = rand() % MOD_6; 
-//         while(times--)
-//         {
-//             node->shiftL();
-//             window.clear();
-//             draw(window);
-//             window.display();
-//             usleep(3000);
-//         }
-//     }
-// }
 
 int DGraph::getAmountOfNodes() const
 {
@@ -85,7 +69,7 @@ void DGraph::handleClick(const sf::Event click, const sf::Vector2f mouseLoc)
     for (auto& node : m_nodes)
         node->handleClick(click, mouseLoc);
 
-    bfs(); //to we need return value for anything?
+    bfs();
 
 }
 

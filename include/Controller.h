@@ -6,7 +6,7 @@
 class Controller
 {
 private:
-    int m_levelNum =1;
+    int m_levelNum = FIRST_LEVEL;
     DGraph m_graph;
     sf::RenderWindow m_window;
     

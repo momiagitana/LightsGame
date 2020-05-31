@@ -24,6 +24,7 @@ private:
     void setPotentialNeighbours(matOfNodes&, const int, const int);
     void randomizeLevel(DGraph&) const;
     void removeMaxLegs(DGraph&) const;
+    bool checkedEveryLeg(bool legs[]) const;
 
 public:
     LevelBuilder(const int, const sf::Vector2u);

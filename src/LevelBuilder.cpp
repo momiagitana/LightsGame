@@ -62,20 +62,10 @@ void LevelBuilder::randomizeLevel(DGraph& graph) const
     while(graph.bfs())
     {
         node = rand() % graph.getAmountOfNodes();
-        leg = rand() % MOD_6; 
+        leg = rand() % LEGS; 
         graph.removeLeg(node, leg);
     }
     graph.addLeg(node, leg);
-
-    // for (int i = 0; i < graph.getAmountOfNodes(); i++)
-    // {
-    //     for (leg = 0; leg < 6; leg++)
-    //     {
-    //         graph.removeLeg(i, leg);
-    //         if (!graph.bfs())
-    //             graph.addLeg(i, leg);
-    //     }
-    // }
 
     removeMaxLegs(graph);
 
@@ -87,10 +77,17 @@ void LevelBuilder::randomizeLevel(DGraph& graph) const
 
 void LevelBuilder::removeMaxLegs(DGraph& graph) const
 {
+    int leg;
     for (auto i = 0; i < graph.getAmountOfNodes(); i++)
     {
-        for (auto leg = 0; leg < 6; leg++)
-        {
+        bool legs[LEGS] = {0, 0, 0, 0, 0, 0};
+        while(!checkedEveryLeg(legs))
+        { 
+            
+            while(legs[leg])
+                leg = rand() % LEGS;
+            legs[leg] = 1;
+            
             graph.removeLeg(i, leg);
             if (!graph.bfs())
                 graph.addLeg(i, leg);
@@ -98,9 +95,16 @@ void LevelBuilder::removeMaxLegs(DGraph& graph) const
     }
 }
 
+bool LevelBuilder::checkedEveryLeg(bool legs[]) const
+{
+    for (auto i = 0; i < LEGS; i++)
+        if (legs[i] == 0)
+            return false;
+    return true;
+}
+
 void LevelBuilder::setPotentialNeighbours(matOfNodes& mat, const int row, const int col)
 {
-    int neigbDiff [6][2]=  {{0, 2}, {1, 1}, {1,-1}, {0,-2}, {-1,-1}, {-1,1}}; //move to consts
     
     std::vector<bool> legs;
     for (int i = 0; i < 6; i++)

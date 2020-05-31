@@ -14,7 +14,7 @@ DNode::DNode(sf::Vector2f loc, float unit)
     m_potentialNeighbours[5] = nullptr;
 }
 
-void DNode::initLegs(std::vector<bool> legs)
+void DNode::initLegs(const std::vector<bool> legs)
 {
     m_legs = legs;
 }
@@ -69,7 +69,7 @@ void DNode::drawEdges(sf::RenderWindow& win, const sf::CircleShape& circle) cons
 }
 
 
-bool DNode::contains(sf::Vector2f loc) const
+bool DNode::contains(const sf::Vector2f loc) const 
 {
     if(makeCircle().getGlobalBounds().contains(loc))
         return true;
@@ -89,7 +89,7 @@ void DNode::shiftL()
     checkTouches();
 }
 
-void DNode::handleClick(sf::Event click, sf::Vector2f mouseLoc)
+void DNode::handleClick(const sf::Event click, const sf::Vector2f mouseLoc)
 {
     if (contains(mouseLoc))
     {
@@ -100,7 +100,7 @@ void DNode::handleClick(sf::Event click, sf::Vector2f mouseLoc)
     }
 }
 
-void DNode::addNeighbour(std::shared_ptr<DNode> newNei, int index)
+void DNode::addNeighbour(const std::shared_ptr<DNode> newNei, const int index)
 {
     m_potentialNeighbours[index] = newNei;
 }
@@ -124,7 +124,7 @@ void DNode::checkTouches()
         }
 }
 
-bool DNode::isTouching(DNode* calledMe)
+bool DNode::isTouching(DNode* calledMe)           
 {
     for(int i = 0; i < m_potentialNeighbours.size(); i++)
         if (m_potentialNeighbours[i].get() == calledMe && m_legs[i])
@@ -137,7 +137,7 @@ bool DNode::isTouching(DNode* calledMe)
     return false;
 }
 
-bool DNode::notMyNeighbour(int name) const
+bool DNode::notMyNeighbour(const int name) const
 {
     for (auto& i : m_actualNeighbours)
         if (i == name)
@@ -146,24 +146,24 @@ bool DNode::notMyNeighbour(int name) const
     return true;
 }
 
-void DNode::removeNeighbour(int toRemove)
+void DNode::removeNeighbour(const int toRemove)
 {
-    for(auto i = 0; i <m_actualNeighbours.size(); i++)
+    for(auto i = 0; i < m_actualNeighbours.size(); i++)
         if(m_actualNeighbours[i] == toRemove)
             m_actualNeighbours.erase(m_actualNeighbours.begin() + i);
 }
 
-void DNode::setName(int name)
+void DNode::setName(const int name)
 {
     m_name = name;
 }
 
-int DNode::getName()
+int DNode::getName() const
 {
     return m_name;
 }
 
-void DNode::takeLeg(int leg)
+void DNode::takeLeg(const int leg)
 {
     if (m_legs[leg])
     {
@@ -172,7 +172,7 @@ void DNode::takeLeg(int leg)
     }
 }
 
-void DNode::addLeg(int leg)
+void DNode::addLeg(const int leg)
 {
     if(!m_legs[leg])
     {
@@ -191,12 +191,12 @@ bool DNode::getStatus() const
     return m_on;
 }
 
-int DNode::getCurrNeighbour(int pos)
+int DNode::getCurrNeighbour(const int pos)
 {
     return m_actualNeighbours[pos];
 }
 
-int DNode::vecSize()
+int DNode::vecNeighboursSize() const
 {
     return m_actualNeighbours.size();
 }

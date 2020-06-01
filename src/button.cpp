@@ -4,6 +4,7 @@
 
 Button::Button(sf::Vector2f loc)
 {
+	//change path here if the arrow is not loading properly
 	m_texture.loadFromFile("next.png");
 	m_sprite.setTexture(m_texture);
 	m_sprite.setPosition(loc);

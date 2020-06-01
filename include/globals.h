@@ -10,7 +10,7 @@ const int LEGS = 6;
 
 const int NEXT_SIZE = 40;
 
-const int MAX_LEVEL = 3;
+const int MAX_LEVEL = 1;
 
 const int FIRST_LEVEL = 1;
 

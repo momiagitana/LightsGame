@@ -5,7 +5,7 @@
 
 LevelBuilder::LevelBuilder(const int level, const sf::Vector2u winSize)
 {
-    srand (time(NULL)); // mabey not best place
+    srand (time(NULL));
 
     m_midRow = MID_ROW_BASE + (level - 1)*2;
 
@@ -138,11 +138,3 @@ void LevelBuilder::nullOrNode(matOfNodes & mat, const int row, const int col)
 
     
 }
-
-//  [ 0, 0, 1, 0, 1, 0, 1, 0, 0 ]
-//  [ 0, 1, 0, 1, 0, 1, 0, 1, 0 ]
-//  [ 1, 0, 1, 0, 1, 0, 1, 0, 1 ]
-//  [ 0, 1, 0, 1, 0, 1, 0, 1, 0 ]
-//  [ 0, 0, 1, 0, 1, 0, 1, 0, 0 ]
-//
-// {{0, 2}, {1, 1}, {1,-1}, {0,-2}, {-1,-1}, {-1,1}}; //move to consts

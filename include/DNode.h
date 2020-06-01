@@ -21,9 +21,9 @@ private:
 
 
     bool contains(const sf::Vector2f) const;
-    bool isTouching(std::shared_ptr<DNode>) const;
-    
-
+    void drawEdges(sf::RenderWindow&, const sf::CircleShape&) const;
+    sf::CircleShape makeCircle() const;
+    bool notMyNeighbour(const int) const;
 
 public:
 
@@ -31,8 +31,6 @@ public:
     void shiftR();
     void checkTouches();
     void draw(sf::RenderWindow&) const;
-    void drawEdges(sf::RenderWindow&, const sf::CircleShape&) const;
-    sf::CircleShape makeCircle() const;
     void handleClick(const sf::Event, const sf::Vector2f);
     void addNeighbour(const std::shared_ptr<DNode>, const int);
     bool isTouching(DNode*);
@@ -46,11 +44,8 @@ public:
     bool getStatus() const;
     int getCurrNeighbour(const int);
     int vecNeighboursSize() const;
-    bool notMyNeighbour(const int) const;
 
     
-
-
     DNode(sf::Vector2f, float);
-    ~DNode();
+    virtual ~DNode();
 };

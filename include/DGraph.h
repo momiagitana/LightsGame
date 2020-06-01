@@ -14,10 +14,10 @@ private:
     lineOfNodes m_nodes;
     
     bool checkConnected() const;
+    void addNode(std::shared_ptr<DNode>);
 
 public:
 
-    void addNode(std::shared_ptr<DNode>);
     void handleClick(const sf::Event, const sf::Vector2f);
     void draw(sf::RenderWindow&);
     bool bfs();
@@ -25,11 +25,11 @@ public:
     void addLeg(const int, const int);
     int getAmountOfNodes() const;
     void spinEmRound();
-    //void nextLevelAnimation(sf::RenderWindow&);
+
 
     DGraph(matOfNodes);
     DGraph();
-    ~DGraph();
+    virtual ~DGraph();
 };
 
 

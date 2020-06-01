@@ -28,7 +28,7 @@ private:
 
 public:
     LevelBuilder(const int, const sf::Vector2u);
-    ~LevelBuilder();
+    virtual ~LevelBuilder();
 
     DGraph build();
 };

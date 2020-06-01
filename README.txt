@@ -1,4 +1,4 @@
-EX3 LIGHTS GAME:
+EX4 LIGHTS GAME:
 
 
 Student's details:
